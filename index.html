@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/2785/2785819.png" type="image/x-icon">
+    <title>COVID-19 Updates</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/png/512/2785/2785819.png" alt="" width="50" height="50"> COVID-19</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="maharashtra.html">Maharashtra</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <center><h1 class="mt-3 mb-4">COVID-19 Live Updates of India</h1></center>
+        <span id="temp"></span>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="text-align: center;">Country</th>
+                    <th scope="col" style="text-align: center;">Active</th>
+                    <th scope="col" style="text-align: center;">Confirmed</th>
+                    <th scope="col" style="text-align: center;">Deaths</th>
+                    <th scope="col" style="text-align: center;">Recovered</th>
+                    <th scope="col" style="text-align: center;">Updated At</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row" style="text-align: center;">India</th>
+                    <td id="in_active" style="text-align: center;"></td>
+                    <td id="in_confirm" style="text-align: center;"></td>
+                    <td id="in_death" style="text-align: center;"></td>
+                    <td id="in_recover" style="text-align: center;"></td>
+                    <td id="in_update" style="text-align: center;"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <center><h3 class="mt-3 mb-4">COVID-19 Live Updates of India (State Level)</h3></center>
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered table-striped">
+              <thead class="thead-dark">
+              <tr>
+                  <th scope="col" style="text-align: center;">States</th>
+                  <th scope="col" style="text-align: center;">Active</th>
+                  <th scope="col" style="text-align: center;">Confirmed</th>
+                  <th scope="col" style="text-align: center;">Deaths</th>
+                  <th scope="col" style="text-align: center;">Recovered</th>
+                  <th scope="col" style="text-align: center;">Updated At</th>
+              </tr>
+              </thead>
+              <tbody id="state_data">
+              </tbody>
+          </table>
+      </div>
+      </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var showdata = $('#temp');
+            var in_active = $('#in_active');
+            var in_confirm = $('#in_confirm');
+            var in_death = $('#in_death');
+            var in_recover = $('#in_recover');
+            var in_update = $('#in_update');
+
+            var st_state = $('#st_state');
+            var st_active = $('#st_active');
+            var st_confirm = $('#st_confirm');
+            var st_death = $('#st_death');
+            var st_recover = $('#st_recover');
+            var st_update = $('#st_update');
+
+            $.ajax({
+                url: `https://api.covid19india.org/data.json`,
+                type: 'get',
+				        dataType: 'json',
+				        success: function(data){
+                    in_active.html(data.statewise[0].active);
+                    in_confirm.html(data.statewise[0].confirmed);
+                    in_death.html(data.statewise[0].deaths);
+                    in_recover.html(data.statewise[0].recovered);
+                    in_update.html(data.statewise[0].lastupdatedtime);
+                    // showdata.html(Object.keys(data.statewise[0]).length);
+                    var html = '';
+						        var i;
+                    var statecount = Object.keys(data.statewise).length;
+                    for(i=1;i<statecount;i++)
+                    {
+                        html += '<tr>'+
+                                '<th style="text-align: center;">'+data.statewise[i].state+'</th>'+
+                                '<td style="text-align: center;">'+data.statewise[i].active+'</td>'+
+                                '<td style="text-align: center;">'+data.statewise[i].confirmed+'</td>'+
+                                '<td style="text-align: center;">'+data.statewise[i].deaths+'</td>'+
+                                '<td style="text-align: center;">'+data.statewise[i].recovered+'</td>'+
+                                '<td style="text-align: center;">'+data.statewise[i].lastupdatedtime+'</td>'+
+                                '</tr>';
+                                // console.log(data.statewise[i].state+"  "+ i);
+                        // htmldata = '<tr><td>'+data.statewise[0].state+'</td></tr>';
+                    } 
+                    $('#state_data').html(html);
+                  }
+            });         
+        });
+    </script>
+  </body>
+</html>

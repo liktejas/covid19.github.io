@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/2785/2785819.png" type="image/x-icon">
+    <title>COVID-19 Maharashtra Updates</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/png/512/2785/2785819.png" alt="" width="50" height="50"> COVID-19</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="maharashtra.html">Maharashtra</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <center><h1 class="mt-3 mb-4">COVID-19 Live Updates of Maharashtra (District Level)</h1></center>
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered table-striped">
+              <thead class="thead-dark">
+              <tr>
+                  <th scope="col" style="text-align: center;">Districts</th>
+                  <th scope="col" style="text-align: center;">Active</th>
+                  <th scope="col" style="text-align: center;">Confirmed</th>
+                  <th scope="col" style="text-align: center;">Deaths</th>
+                  <th scope="col" style="text-align: center;">Recovered</th>
+              </tr>
+              </thead>
+              <tbody id="dist_data">
+              </tbody>
+          </table>
+      </div>
+      </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: `https://api.covid19india.org/v2/state_district_wise.json`,
+                type: 'get',
+				        dataType: 'json',
+		            success: function(data){
+                    var html = '';
+				            var i;
+                    var discount = data[18].districtData.length;
+                    for(i=0;i<discount;i++)
+                    {
+                        html += '<tr>'+
+                                '<th style="text-align: center;">'+data[18].districtData[i].district+'</th>'+
+                                '<td style="text-align: center;">'+data[18].districtData[i].active+'</td>'+
+                                '<td style="text-align: center;">'+data[18].districtData[i].confirmed+'</td>'+
+                                '<td style="text-align: center;">'+data[18].districtData[i].deceased+'</td>'+
+                                '<td style="text-align: center;">'+data[18].districtData[i].recovered+'</td>'+
+                                '</tr>';
+                                // console.log(data.state[0]);
+                    } 
+                    $('#dist_data').html(html);
+                      // console.log(data[0].state);
+                      // console.log(data[0].districtData[0].district);
+                      // statescount = data.length
+                      // console.log(statescount);
+                      console.log(discount);
+                      
+                      // for(i=0;i<statescount;i++)
+                      // {
+                      //   console.log(data[i].state+"  "+i);
+                      // }
+                      // console.log(data[18].state);
+                      // console.log(data[18].districtData[0].district);
+                      // console.log(data[18].districtData.length);
+                      
+                      
+                  }
+            });         
+        });
+    </script>
+  </body>
+</html>
