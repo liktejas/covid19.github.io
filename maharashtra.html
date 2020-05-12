@@ -30,6 +30,9 @@
             <li class="nav-item active">
               <a class="nav-link" href="maharashtra.html">Maharashtra</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="world.html">World</a>
+            </li> 
           </ul>
         </div>
       </nav>
@@ -77,24 +80,8 @@
                                 '<td style="text-align: center;">'+data[18].districtData[i].deceased+'</td>'+
                                 '<td style="text-align: center;">'+data[18].districtData[i].recovered+'</td>'+
                                 '</tr>';
-                                // console.log(data.state[0]);
                     } 
-                    $('#dist_data').html(html);
-                      // console.log(data[0].state);
-                      // console.log(data[0].districtData[0].district);
-                      // statescount = data.length
-                      // console.log(statescount);
-                      console.log(discount);
-                      
-                      // for(i=0;i<statescount;i++)
-                      // {
-                      //   console.log(data[i].state+"  "+i);
-                      // }
-                      // console.log(data[18].state);
-                      // console.log(data[18].districtData[0].district);
-                      // console.log(data[18].districtData.length);
-                      
-                      
+                    $('#dist_data').html(html);   
                   }
             });         
         });
