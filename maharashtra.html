@@ -66,19 +66,19 @@
             $.ajax({
                 url: `https://api.covid19india.org/v2/state_district_wise.json`,
                 type: 'get',
-				        dataType: 'json',
+				dataType: 'json',
 		            success: function(data){
                     var html = '';
 				            var i;
-                    var discount = data[18].districtData.length;
+                    var discount = data[19].districtData.length;
                     for(i=0;i<discount;i++)
                     {
                         html += '<tr>'+
-                                '<th style="text-align: center;">'+data[18].districtData[i].district+'</th>'+
-                                '<td style="text-align: center;">'+data[18].districtData[i].active+'</td>'+
-                                '<td style="text-align: center;">'+data[18].districtData[i].confirmed+'</td>'+
-                                '<td style="text-align: center;">'+data[18].districtData[i].deceased+'</td>'+
-                                '<td style="text-align: center;">'+data[18].districtData[i].recovered+'</td>'+
+                                '<th style="text-align: center;">'+data[19].districtData[i].district+'</th>'+
+                                '<td style="text-align: center;">'+data[19].districtData[i].active+'</td>'+
+                                '<td style="text-align: center;">'+data[19].districtData[i].confirmed+'</td>'+
+                                '<td style="text-align: center;">'+data[19].districtData[i].deceased+'</td>'+
+                                '<td style="text-align: center;">'+data[19].districtData[i].recovered+'</td>'+
                                 '</tr>';
                     } 
                     $('#dist_data').html(html);   
