@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/2785/2785819.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <title>COVID-19 Live Updates of India</title>
     <style>
       .footer {
@@ -64,7 +65,7 @@
         </div>
         <center><h3 class="mt-3 mb-4">COVID-19 Live Updates of India (State Level)</h3></center>
         <div class="table-responsive">
-          <table class="table table-hover table-bordered table-striped">
+          <table class="table table-hover table-bordered table-striped" id="myTable">
               <thead class="thead-dark">
               <tr>
                   <th scope="col" style="text-align: center;">States</th>
@@ -87,6 +88,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
             var showdata = $('#temp');
@@ -106,15 +108,15 @@
             $.ajax({
                 url: `https://api.covid19india.org/data.json`,
                 type: 'get',
-				        dataType: 'json',
-				        success: function(data){
+				dataType: 'json',
+				success: function(data){
                     in_active.html(data.statewise[0].active);
                     in_confirm.html(data.statewise[0].confirmed);
                     in_death.html(data.statewise[0].deaths);
                     in_recover.html(data.statewise[0].recovered);
                     in_update.html(data.statewise[0].lastupdatedtime);
                     var html = '';
-						        var i;
+					var i;
                     var statecount = Object.keys(data.statewise).length;
                     for(i=1;i<statecount;i++)
                     {
@@ -128,6 +130,7 @@
                                 '</tr>';
                     } 
                     $('#state_data').html(html);
+                    $('#myTable').DataTable();
                   }
             });         
         });

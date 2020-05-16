@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/2785/2785819.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <title>COVID-19 World Updates</title>
     <style>
       .footer {
@@ -64,7 +65,7 @@
         </div>
         <center><h3 class="mt-3 mb-4">COVID-19 Live Updates of World (Country Level)</h3></center>
         <div class="table-responsive">
-          <table class="table table-hover table-bordered table-striped">
+          <table class="table table-hover table-bordered table-striped" id="myTable">
               <thead class="thead-dark">
               <tr>
                   <th scope="col" style="text-align: center;">Country</th>
@@ -89,14 +90,15 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
 
             $.ajax({
                 url: `https://api.covid19api.com/summary`,
                 type: 'get',
-			        	dataType: 'json',
-			        	success: function(data){
+			    dataType: 'json',
+			    success: function(data){
                     $('#world_newconfirmed').html(data.Global.NewConfirmed);
                     $('#world_totalconfirmed').html(data.Global.TotalConfirmed);
                     $('#world_newdeath').html(data.Global.NewDeaths);
@@ -104,7 +106,7 @@
                     $('#world_newrecovered').html(data.Global.NewRecovered);
                     $('#world_totalrecover').html(data.Global.TotalRecovered);
                     var html = '';
-				          	var i;
+				    var i;
                     var countrycount = data.Countries.length;
                     for(i=0;i<countrycount;i++)
                     {
@@ -120,6 +122,7 @@
                                 '</tr>';
                     } 
                     $('#country_data').html(html);
+                    $('#myTable').DataTable();
                   }
             });         
         });
