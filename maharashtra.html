@@ -73,15 +73,23 @@
                 success: function(data){
                     var html = '';
                     var i;
-                    var discount = data[19].districtData.length;
+                    var state_count = data.length;
+                    for(i=1;i<state_count;i++)
+                    {
+                      if(data[i].state == 'Maharashtra')
+                      {
+                        var state_val = i;
+                      }
+                    }
+                    var discount = data[state_val].districtData.length;
                     for(i=0;i<discount;i++)
                     {
                         html += '<tr>'+
-                                '<th style="text-align: center;">'+data[19].districtData[i].district+'</th>'+
-                                '<td style="text-align: center;">'+data[19].districtData[i].active+'</td>'+
-                                '<td style="text-align: center;">'+data[19].districtData[i].confirmed+'</td>'+
-                                '<td style="text-align: center;">'+data[19].districtData[i].deceased+'</td>'+
-                                '<td style="text-align: center;">'+data[19].districtData[i].recovered+'</td>'+
+                                '<th style="text-align: center;">'+data[state_val].districtData[i].district+'</th>'+
+                                '<td style="text-align: center;">'+data[state_val].districtData[i].active+'</td>'+
+                                '<td style="text-align: center;">'+data[state_val].districtData[i].confirmed+'</td>'+
+                                '<td style="text-align: center;">'+data[state_val].districtData[i].deceased+'</td>'+
+                                '<td style="text-align: center;">'+data[state_val].districtData[i].recovered+'</td>'+
                                 '</tr>';
                     } 
                     $('#dist_data').html(html);
