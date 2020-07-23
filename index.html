@@ -1,144 +1,178 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/2785/2785819.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-    <title>COVID-19 Live Updates of India</title>
-    <style>
-      .footer {
-           color: white;
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/png/512/2785/2785819.png" alt="" width="50" height="50"> COVID-19 Updates</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="maharashtra.html">Maharashtra</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="world.html">World</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div class="container">
-        <center><h1 class="mt-3 mb-4">COVID-19 Live Updates of India</h1></center>
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col" style="text-align: center;">Country</th>
-                    <th scope="col" style="text-align: center;">Active</th>
-                    <th scope="col" style="text-align: center;">Confirmed</th>
-                    <th scope="col" style="text-align: center;">Deaths</th>
-                    <th scope="col" style="text-align: center;">Recovered</th>
-                    <th scope="col" style="text-align: center;">Updated At</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row" style="text-align: center;">India</th>
-                    <td id="in_active" style="text-align: center;"></td>
-                    <td id="in_confirm" style="text-align: center;"></td>
-                    <td id="in_death" style="text-align: center;"></td>
-                    <td id="in_recover" style="text-align: center;"></td>
-                    <td id="in_update" style="text-align: center;"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <center><h3 class="mt-3 mb-4">COVID-19 Live Updates of India (State Level)</h3></center>
-        <div class="table-responsive">
-          <table class="table table-hover table-bordered table-striped" id="myTable">
-              <thead class="thead-dark">
-              <tr>
-                  <th scope="col" style="text-align: center;">States</th>
-                  <th scope="col" style="text-align: center;">Active</th>
-                  <th scope="col" style="text-align: center;">Confirmed</th>
-                  <th scope="col" style="text-align: center;">Deaths</th>
-                  <th scope="col" style="text-align: center;">Recovered</th>
-                  <th scope="col" style="text-align: center;">Updated At</th>
-              </tr>
-              </thead>
-              <tbody id="state_data">
-              </tbody>
-          </table>
-      </div>
-      </div>
-    
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/2785/2785819.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> 
+  <title>COVID-19 Live Updates of India</title>
+  <style>
+    body{
+      font-family: 'Ubuntu', sans-serif;
+    }
+    .footer {
+     color: white;
+   }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark shadow" style="background-color: #462D6C">
+    <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/png/512/2785/2785819.png" alt="" width="50" height="50"> COVID-19 Updates</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var showdata = $('#temp');
-            var in_active = $('#in_active');
-            var in_confirm = $('#in_confirm');
-            var in_death = $('#in_death');
-            var in_recover = $('#in_recover');
-            var in_update = $('#in_update');
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="maharashtra.html">Maharashtra</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="world.html">World</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <center><h1 class="mt-3 mb-4" style="font-family: 'Proza Libre', sans-serif;">COVID-19 Live Updates of India</h1></center>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+        <thead style="background-color: #ffc107">
+          <tr>
+            <th scope="col" style="text-align: center;">Country</th>
+            <th scope="col" style="text-align: center;">Active</th>
+            <th scope="col" style="text-align: center;">Confirmed</th>
+            <th scope="col" style="text-align: center;">Deaths</th>
+            <th scope="col" style="text-align: center;">Recovered</th>
+            <th scope="col" style="text-align: center;">Updated At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" style="text-align: center;">India</th>
+            <td id="in_active" style="text-align: center;"></td>
+            <td id="in_confirm" style="text-align: center;"></td>
+            <td id="in_death" style="text-align: center;"></td>
+            <td id="in_recover" style="text-align: center;"></td>
+            <td id="in_update" style="text-align: center;"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <center>
+      <div id="piechart" style="width: 500px; height: 300px;"></div>
+    </center>
+    <center><h3 class="mb-4" style="font-family: 'Proza Libre', sans-serif;">COVID-19 Live Updates of India (State Level)</h3></center>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered table-striped" id="myTable">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" style="text-align: center;">States</th>
+            <th scope="col" style="text-align: center;">Active</th>
+            <th scope="col" style="text-align: center;">Confirmed</th>
+            <th scope="col" style="text-align: center;">Deaths</th>
+            <th scope="col" style="text-align: center;">Recovered</th>
+            <th scope="col" style="text-align: center;">Updated&nbsp;At</th>
+          </tr>
+        </thead>
+        <tbody id="state_data">
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-            var st_state = $('#st_state');
-            var st_active = $('#st_active');
-            var st_confirm = $('#st_confirm');
-            var st_death = $('#st_death');
-            var st_recover = $('#st_recover');
-            var st_update = $('#st_update');
 
-            $.ajax({
-                url: `https://api.covid19india.org/data.json`,
-                type: 'get',
-				dataType: 'json',
-				success: function(data){
-                    in_active.html(data.statewise[0].active);
-                    in_confirm.html(data.statewise[0].confirmed);
-                    in_death.html(data.statewise[0].deaths);
-                    in_recover.html(data.statewise[0].recovered);
-                    in_update.html(data.statewise[0].lastupdatedtime);
-                    var html = '';
-					var i;
-                    var statecount = Object.keys(data.statewise).length;
-                    for(i=1;i<statecount;i++)
-                    {
-                        html += '<tr>'+
-                                '<th style="text-align: center;">'+data.statewise[i].state+'</th>'+
-                                '<td style="text-align: center;">'+data.statewise[i].active+'</td>'+
-                                '<td style="text-align: center;">'+data.statewise[i].confirmed+'</td>'+
-                                '<td style="text-align: center;">'+data.statewise[i].deaths+'</td>'+
-                                '<td style="text-align: center;">'+data.statewise[i].recovered+'</td>'+
-                                '<td style="text-align: center;">'+data.statewise[i].lastupdatedtime+'</td>'+
-                                '</tr>';
-                    } 
-                    $('#state_data').html(html);
-                    $('#myTable').DataTable();
-                  }
-            });         
-        });
-    </script>
-    <footer class="footer mt-auto py-3 bg-dark">
-      <div class="container">
-        <center><span>Website Developed by:- Tejas Prabhakar Sonawane.</span></center>
-      </div>
-    </footer>
-  </body>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+    $(document).ready(function () {
+      var showdata = $('#temp');
+      var in_active = $('#in_active');
+      var in_confirm = $('#in_confirm');
+      var in_death = $('#in_death');
+      var in_recover = $('#in_recover');
+      var in_update = $('#in_update');
+
+      var st_state = $('#st_state');
+      var st_active = $('#st_active');
+      var st_confirm = $('#st_confirm');
+      var st_death = $('#st_death');
+      var st_recover = $('#st_recover');
+      var st_update = $('#st_update');
+
+      $.ajax({
+        url: `https://api.covid19india.org/data.json`,
+        type: 'get',
+        dataType: 'json',
+        success: function(data){
+          in_active.html(data.statewise[0].active);
+          in_confirm.html(data.statewise[0].confirmed);
+          in_death.html(data.statewise[0].deaths);
+          in_recover.html(data.statewise[0].recovered);
+          in_update.html(data.statewise[0].lastupdatedtime);
+          var html = '';
+          var i;
+          var statecount = Object.keys(data.statewise).length;
+          for(i=1;i<statecount;i++)
+          {
+            html += '<tr>'+
+            '<th style="text-align: center;">'+data.statewise[i].state+'</th>'+
+            '<td style="text-align: center;">'+data.statewise[i].active+'</td>'+
+            '<td style="text-align: center;">'+data.statewise[i].confirmed+'</td>'+
+            '<td style="text-align: center;">'+data.statewise[i].deaths+'</td>'+
+            '<td style="text-align: center;">'+data.statewise[i].recovered+'</td>'+
+            '<td style="text-align: center;">'+data.statewise[i].lastupdatedtime+'</td>'+
+            '</tr>';
+          }
+          $('#state_data').html(html);
+          $('#myTable').DataTable();
+          var iactive = parseInt(data.statewise[0].active);
+          var irecover = parseInt(data.statewise[0].recovered);
+          var ideath = parseInt(data.statewise[0].deaths);
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Percentage'],
+              ['Recovered',     irecover],
+              ['Death',      ideath],
+              ['Active',  iactive],
+              ]);
+
+            var options = {
+              colors: ['#28a745', '#dc3545', '#007bff'],
+              is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+          }
+          $(window).resize(function(){
+            drawChart();
+          });
+        }
+      });      
+    });
+  </script>
+  <footer class="footer mt-auto py-3" style="background-color: #4A3170">
+    <div class="container">
+      <center><span>Website Developed by:- Tejas Prabhakar Sonawane.</span></center>
+    </div>
+  </footer>
+</body>
 </html>

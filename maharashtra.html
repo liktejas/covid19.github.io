@@ -1,107 +1,157 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/2785/2785819.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-    <title>COVID-19 Maharashtra Updates</title>
-    <style>
-      .footer {
-           color: white;
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/png/512/2785/2785819.png" alt="" width="50" height="50"> COVID-19 Updates</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="maharashtra.html">Maharashtra</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="world.html">World</a>
-            </li> 
-          </ul>
-        </div>
-      </nav>
-      <div class="container">
-        <center><h1 class="mt-3 mb-4">COVID-19 Live Updates of Maharashtra (District Level)</h1></center>
-        <div class="table-responsive">
-          <table class="table table-hover table-bordered table-striped" id="myTable">
-              <thead class="thead-dark">
-              <tr>
-                  <th scope="col" style="text-align: center;">Districts</th>
-                  <th scope="col" style="text-align: center;">Active</th>
-                  <th scope="col" style="text-align: center;">Confirmed</th>
-                  <th scope="col" style="text-align: center;">Deaths</th>
-                  <th scope="col" style="text-align: center;">Recovered</th>
-              </tr>
-              </thead>
-              <tbody id="dist_data">
-              </tbody>
-          </table>
-      </div>
-      </div>
-    
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/2785/2785819.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+  <title>COVID-19 Maharashtra Updates</title>
+  <style>
+    body{
+      font-family: 'Ubuntu', sans-serif;
+    }
+    .footer {
+     color: white;
+   }
+ </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark shadow" style="background-color: #462D6C">
+    <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/png/512/2785/2785819.png" alt="" width="50" height="50"> COVID-19 Updates</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function () {
-          
-            $.ajax({
-                url: `https://api.covid19india.org/v2/state_district_wise.json`,
-                type: 'get',
-                dataType: 'json',
-                success: function(data){
-                    var html = '';
-                    var i;
-                    var state_count = data.length;
-                    for(i=1;i<state_count;i++)
-                    {
-                      if(data[i].state == 'Maharashtra')
-                      {
-                        var state_val = i;
-                      }
-                    }
-                    var discount = data[state_val].districtData.length;
-                    for(i=0;i<discount;i++)
-                    {
-                        html += '<tr>'+
-                                '<th style="text-align: center;">'+data[state_val].districtData[i].district+'</th>'+
-                                '<td style="text-align: center;">'+data[state_val].districtData[i].active+'</td>'+
-                                '<td style="text-align: center;">'+data[state_val].districtData[i].confirmed+'</td>'+
-                                '<td style="text-align: center;">'+data[state_val].districtData[i].deceased+'</td>'+
-                                '<td style="text-align: center;">'+data[state_val].districtData[i].recovered+'</td>'+
-                                '</tr>';
-                    } 
-                    $('#dist_data').html(html);
-                    $('#myTable').DataTable();
-                  }
-            });         
-        });
-    </script>
-    <footer class="footer mt-auto py-3 bg-dark">
-      <div class="container">
-        <center><span>Website Developed by:- Tejas Prabhakar Sonawane.</span></center>
-      </div>
-    </footer>
-  </body>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="maharashtra.html">Maharashtra</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="world.html">World</a>
+        </li> 
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <center><h1 class="mt-4 mb-4" style="font-family: 'Proza Libre', sans-serif;">COVID-19 Live Updates of Maharashtra (District Level)</h1></center>
+    <center>
+      <div id="piechart" style="width: 500px; height: 300px;"></div>
+    </center>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered table-striped" id="myTable">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" style="text-align: center;">Districts</th>
+            <th scope="col" style="text-align: center;">Active</th>
+            <th scope="col" style="text-align: center;">Confirmed</th>
+            <th scope="col" style="text-align: center;">Deaths</th>
+            <th scope="col" style="text-align: center;">Recovered</th>
+          </tr>
+        </thead>
+        <tbody id="dist_data">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+    $(document).ready(function () {
+
+      $.ajax({
+        url: `https://api.covid19india.org/v2/state_district_wise.json`,
+        type: 'get',
+        dataType: 'json',
+        success: function(data){
+          var html = '';
+          var i;
+          var state_count = data.length;
+          for(i=1;i<state_count;i++)
+          {
+            if(data[i].state == 'Maharashtra')
+            {
+              var state_val = i;
+            }
+          }
+          var discount = data[state_val].districtData.length;
+          for(i=0;i<discount;i++)
+          {
+            html += '<tr>'+
+            '<th style="text-align: center;">'+data[state_val].districtData[i].district+'</th>'+
+            '<td style="text-align: center;">'+data[state_val].districtData[i].active+'</td>'+
+            '<td style="text-align: center;">'+data[state_val].districtData[i].confirmed+'</td>'+
+            '<td style="text-align: center;">'+data[state_val].districtData[i].deceased+'</td>'+
+            '<td style="text-align: center;">'+data[state_val].districtData[i].recovered+'</td>'+
+            '</tr>';
+          } 
+          $('#dist_data').html(html);
+          $('#myTable').DataTable();
+        }
+      });
+
+      $.ajax({
+        url: `https://api.covid19india.org/data.json`,
+        type: 'get',
+        dataType: 'json',
+        success: function(data){
+          var statecount = Object.keys(data.statewise).length;
+          for(i=1;i<statecount;i++)
+          {
+            if(data.statewise[i].state == 'Maharashtra')
+            {
+              var state_val = i;
+              var m_active = parseInt(data.statewise[state_val].active);
+              var m_recovered = parseInt(data.statewise[state_val].recovered);
+              var m_deaths = parseInt(data.statewise[state_val].deaths);
+            }
+          }
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+              var data = google.visualization.arrayToDataTable([
+                ['Task', 'Percentage'],
+                ['Recovered',     m_recovered],
+                ['Death',      m_deaths],
+                ['Active',  m_active],
+                ]);
+
+              var options = {
+                colors: ['#28a745', '#dc3545', '#007bff'],
+                is3D: true,
+              };
+
+              var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+              chart.draw(data, options);
+            }
+            $(window).resize(function(){
+              drawChart();
+            });
+        }
+      });
+    });
+  </script>
+  <footer class="footer mt-auto py-3" style="background-color: #4A3170">
+    <div class="container">
+      <center><span>Website Developed by:- Tejas Prabhakar Sonawane.</span></center>
+    </div>
+  </footer>
+</body>
 </html>

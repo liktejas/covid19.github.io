@@ -9,15 +9,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/2785/2785819.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <title>COVID-19 World Updates</title>
     <style>
+      body{
+      font-family: 'Ubuntu', sans-serif;
+      }
       .footer {
            color: white;
       }
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark shadow" style="background-color: #462D6C">
         <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/png/512/2785/2785819.png" alt="" width="50" height="50"> COVID-19 Updates</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -38,10 +43,10 @@
         </div>
       </nav>
       <div class="container">
-        <center><h1 class="mt-3 mb-4">COVID-19 Live Updates of World</h1></center>
+        <center><h1 class="mt-3 mb-4" style="font-family: 'Proza Libre', sans-serif;">COVID-19 Live Updates of World</h1></center>
         <div class="table-responsive">
             <table class="table table-hover table-bordered">
-                <thead class="thead-dark">
+                <thead style="background-color: #ffc107">
                 <tr>
                     <th scope="col" style="text-align: center;">NewConfirmed</th>
                     <th scope="col" style="text-align: center;">TotalConfirmed</th>
@@ -63,7 +68,7 @@
                 </tbody>
             </table>
         </div>
-        <center><h3 class="mt-3 mb-4">COVID-19 Live Updates of World (Country Level)</h3></center>
+        <center><h3 class="mt-3 mb-4" style="font-family: 'Proza Libre', sans-serif;">COVID-19 Live Updates of World (Country Level)</h3></center>
         <div class="table-responsive">
           <table class="table table-hover table-bordered table-striped" id="myTable">
               <thead class="thead-dark">
@@ -75,7 +80,7 @@
                   <th scope="col" style="text-align: center;">TotalDeaths</th>
                   <th scope="col" style="text-align: center;">NewRecovered</th>
                   <th scope="col" style="text-align: center;">TotalRecovered</th>
-                  <th scope="col" style="text-align: center;">Updated At</th>
+                  <th scope="col" style="text-align: center;">Updated&nbsp;At</th>
               </tr>
               </thead>
               <tbody id="country_data">
@@ -91,6 +96,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
         $(document).ready(function () {
 
@@ -127,7 +133,7 @@
             });         
         });
     </script>
-    <footer class="footer mt-auto py-3 bg-dark">
+    <footer class="footer mt-auto py-3" style="background-color: #4A3170">
       <div class="container">
         <center><span>Website Developed by:- Tejas Prabhakar Sonawane.</span></center>
       </div>
